@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista nauczycieli prowadzących dane kursy:</h2>
+{% for teacher in teachers %}
+    <h3>{{ teacher.name }} {{ teacher.surname }}</h3>
+    <p>{{teacher.bio}}</p>
+    <p><b>Prowadzone kursy:</b></p>
+    {% for course in teacher.courses.all %}
+        <strong>{{ course.name }}: </strong> (Edycje:
+            {% for edition in course.courseedition_set.all %}
+                {{ edition.name }}{% if not forloop.last %},{% endif %}
+            {% endfor %})
+        <br>
+    {% endfor %}
+    <hr>
+{% endfor %}
+{% endblock %}

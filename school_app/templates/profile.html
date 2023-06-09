@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Profil Użytkownika</h2>
+
+<div>
+    <h3>Witaj, {{ request.user.username }}!</h3>
+    {% if request.user.student %}
+        <p>Imię: {{ request.user.student.name }}</p>
+        <p>Nazwisko: {{ request.user.student.surname }}</p>
+    {% endif %}
+    <p>Data dołączenia: {{ request.user.date_joined }}</p>
+    <p>Ostatnie logowanie: {{ request.user.last_login }}</p>
+</div>
+
+{% if request.user.student %}
+<h3>Twoje Kursy</h3>
+<ul>
+    {% for enrollment in request.user.student.enrollment_set.all %}
+        <li>
+            <strong>Kurs:</strong> {{ enrollment.course_edition.course.name }} - {{ enrollment.course_edition.course.language.name }}
+            <ul>
+                <li><strong>Edycja:</strong> {{ enrollment.course_edition.name }}</li>
+                <li><strong>Poziom:</strong> {{ enrollment.course_edition.level.name }}</li>
+                <li><strong>Nauczyciele prowadzący:</strong>
+                    {% for teacher in enrollment.course_edition.course.teacher_set.all %}
+                        {{ teacher.name }} {{ teacher.surname }}
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </li>
+            </ul>
+        </li>
+    {% empty %}
+        <li>Nie jesteś jeszcze zapisany na żadne dostępne kursy.</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{% endblock %}

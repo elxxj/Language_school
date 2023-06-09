@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{ course_edition.name }}</h2>
+<p>O kursie: {{ course_edition.description }}</p>
+<p>Poziom: {{ course_edition.level.name }}</p>
+<p>Data rozpoczęcia kursu: {{ course_edition.start_date }}</p>
+<p>Data zakończenia kursu: {{ course_edition.end_date }}</p>
+<h3>Nauczyciele prowadzący:</h3>
+<ul>
+{% for teacher in course_edition.teacher_set.all %}
+    <li>{{ teacher.name }} {{ teacher.surname }}</li>
+{% empty %}
+    <li>Brak nauczycieli prowadzących.</li>
+{% endfor %}
+</ul>
+{% endblock %}

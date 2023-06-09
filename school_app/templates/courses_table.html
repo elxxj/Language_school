@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table>
+  <thead>
+    <tr>
+      <th>KURS</th>
+      <th>JĘZYK</th>
+      <th>EDYCJA KURSU</th>
+      <th>NAUCZYCIELE PROWADZĄCY</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for course in courses %}
+    <tr>
+      <td>{{ course.name }}</td>
+      <td>{{ course.language.name }}</td>
+      <td>
+        {% for edition in course.courseedition_set.all %}
+        <a href="{% url 'course_edition_details' edition.id %}">{{ edition.name }}</a><br>
+        {% endfor %}
+      </td>
+      <td>
+        {% for teacher in course.teacher_set.all %}
+        {{ teacher.name }} {{ teacher.surname }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+       </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

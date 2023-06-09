@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Opinie</h2>
+{% for review in reviews %}
+
+<h5><i>{{ review.text }}</i></h5>
+Opinia od: {{ review.student.name }}
+{% empty %}
+    <p>Brak opinii.</p>
+{% endfor %}
+
+{% if form %}
+    <h2>Dodaj swoją opinię</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Dodaj opinię</button>
+    </form>
+{% else %}
+    <p>Aby dodać opinię, musisz być zalogowany. <a href="{% url 'login' %}">Zaloguj się</a>.</p>
+{% endif %}
+
+{% endblock %}
