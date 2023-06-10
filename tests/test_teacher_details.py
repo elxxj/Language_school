@@ -6,6 +6,7 @@ from school_app.models import Teacher
 
 @pytest.mark.django_db
 def test_teacher_details_page_status_code():
+    """Test sprawdza, czy kod statusu odpowiedzi HTTP wynosi 200, czyli, że żądanie zakończyło się pomyślnie."""
     client = Client()
     response = client.get(reverse('teacher_details'))
     assert response.status_code == 200
@@ -13,6 +14,7 @@ def test_teacher_details_page_status_code():
 
 @pytest.mark.django_db
 def test_teacher_details_page_template():
+    """Test sprawdza, czy strona teacher_details wyświetla szablon 'teacher_details.html'."""
     client = Client()
     response = client.get(reverse('teacher_details'))
     assert response.status_code == 200
@@ -21,6 +23,7 @@ def test_teacher_details_page_template():
 
 @pytest.mark.django_db
 def test_teacher_details_page_data():
+    """Test sprawdza, czy strona poprawnie wyświetla dane nauczyciela utworzonego w tym teście."""
     client = Client()
     teacher = Teacher.objects.create(
         name='Test Teacher',

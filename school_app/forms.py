@@ -6,7 +6,7 @@ from .models import Review
 
 class StudentRegistrationForm(forms.Form):
     """
-    Jest to formularz rejestracji studenta do szkoły językowej
+    Jest to formularz rejestracji studenta do szkoły językowej.
     """
     name = forms.CharField(max_length=50, label='Imię')
     surname = forms.CharField(max_length=50, label='Nazwisko')
@@ -16,7 +16,7 @@ class StudentRegistrationForm(forms.Form):
 
     def clean(self):
         """
-        Czyści dane w formularzu i sprawdza poprawność wprowadzonego hasła
+        Czyści dane w formularzu i sprawdza poprawność wprowadzonego hasła.
         """
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
@@ -27,7 +27,7 @@ class StudentRegistrationForm(forms.Form):
 
     def save(self):
         """
-        Tworzy użytkownika - studenta
+        Tworzy użytkownika - studenta.
         """
         name = self.cleaned_data['name']
         surname = self.cleaned_data['surname']
@@ -42,7 +42,7 @@ class StudentRegistrationForm(forms.Form):
 
 class ReviewForm(forms.ModelForm):
     """
-    Jest to formularz dodawania opinii
+    Jest to formularz dodawania opinii.
     """
     class Meta:
         model = Review

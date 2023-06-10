@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Language(models.Model):
+    """
+    Model z danymi o językach.
+    """
     name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -11,6 +14,9 @@ class Language(models.Model):
 
 
 class Course(models.Model):
+    """
+    Model z danymi o kursie.
+    """
     name = models.CharField(max_length=100)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     price = models.FloatField(null=True, blank=True)
@@ -20,6 +26,9 @@ class Course(models.Model):
 
 
 class Level(models.Model):
+    """
+    Model z danymi o poziomie.
+    """
     name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -27,6 +36,9 @@ class Level(models.Model):
 
 
 class CourseEdition(models.Model):
+    """
+    Model z danymi o edycji kursu.
+    """
     name = models.CharField(max_length=100)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE, null=True)
@@ -40,6 +52,9 @@ class CourseEdition(models.Model):
 
 
 class Teacher(models.Model):
+    """
+    Model z danymi o nauczycielach.
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
@@ -53,6 +68,9 @@ class Teacher(models.Model):
 
 
 class Student(models.Model):
+    """
+    Model z danymi o uczniach.
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
@@ -62,6 +80,9 @@ class Student(models.Model):
 
 
 class Enrollment(models.Model):
+    """
+    Model z danymi o zapisie studenta na edycję kursu.
+    """
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     course_edition = models.ForeignKey(CourseEdition, on_delete=models.CASCADE)
     date_enrolled = models.DateTimeField(auto_now_add=True)
@@ -71,6 +92,9 @@ class Enrollment(models.Model):
 
 
 class Review(models.Model):
+    """
+    Model z danymi o opinii studenta na temat szkoły.
+    """
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     text = models.TextField(null=True)
     date_posted = models.DateTimeField(auto_now_add=True)

@@ -8,21 +8,21 @@ from .forms import ReviewForm
 
 def home(request):
     """
-    Wyświetla stronę główną mojego projektu - Language Sail Academy
+    Wyświetla stronę główną mojego projektu - Language Sail Academy.
     """
     return render(request, 'home.html')
 
 
 def about(request):
     """
-    Wyświetla widok 'O nas', gdzie znajduje się krótki opis szkoły
+    Wyświetla widok 'O nas', gdzie znajduje się krótki opis szkoły.
     """
     return render(request, 'about.html')
 
 
 def courses_table(request):
     """
-    Wyświetla widok 'Kursy', gdzie znajdują się dane o kursach (Kurs, Jezyk, Edycja kursu, Nauczyciele prowadzący)
+    Wyświetla widok 'Kursy', gdzie znajdują się dane o kursach (Kurs, Jezyk, Edycja kursu, Nauczyciele prowadzący).
     """
     courses = Course.objects.all()
 
@@ -36,7 +36,7 @@ def courses_table(request):
 def course_edition_details(request, edition_id):
     """
     Wyświetla dane szczegółowe na temat danej edycji kursu.
-    Dane to: opis o kursie, poziom, data rozpoczęcia kursu, data zakończenia kursu, nauczyciele prowadzący
+    Dane to: opis o kursie, poziom, data rozpoczęcia kursu, data zakończenia kursu, nauczyciele prowadzący.
     """
     course_edition = CourseEdition.objects.get(id=edition_id)
 
@@ -48,7 +48,7 @@ def course_edition_details(request, edition_id):
 
 def teacher_details(request):
     """
-    Wyświetla widok 'Lektorzy', gdzie znajdują się dane dotyczące nauczycieli (ich bio i prowadzone przez nich kursy i edycje)
+    Wyświetla widok 'Lektorzy', gdzie znajdują się dane dotyczące nauczycieli (ich bio i prowadzone przez nich kursy i edycje).
     """
     teachers = Teacher.objects.all()
     return render(request, 'teacher_details.html', {'teachers': teachers})
@@ -56,7 +56,7 @@ def teacher_details(request):
 
 def review(request):
     """
-    Wyświetla widok 'Opinie', gdzie student może zobaczyć opinie innych i dodać swoją własną opinię na temat szkoły jezykowej
+    Wyświetla widok 'Opinie', gdzie student może zobaczyć opinie innych i dodać swoją własną opinię na temat szkoły jezykowej.
     """
     reviews = Review.objects.all()
     if request.user.is_authenticated:
@@ -76,14 +76,14 @@ def review(request):
 
 def contact(request):
     """
-    Wyświetla widok 'Kontakt', gdzie znajduja się dane kontaktowe do szkoły językowej (adres, telefon, mail, instagram)
+    Wyświetla widok 'Kontakt', gdzie znajduja się dane kontaktowe do szkoły językowej (adres, telefon, mail, instagram).
     """
     return render(request, 'contact.html')
 
 
 def student_registration(request):
     """
-    Wyświetla widok 'Rejestracja', gdzie student może zarejestrować się do szkoły podając imię, nazwisko, nazwę użytkownika i hasło
+    Wyświetla widok 'Rejestracja', gdzie student może zarejestrować się do szkoły podając imię, nazwisko, nazwę użytkownika i hasło.
     """
     if request.method == 'POST':
         form = StudentRegistrationForm(request.POST)
@@ -102,6 +102,6 @@ def student_registration(request):
 @login_required
 def profile(request):
     """
-    Wyświetla profil studenta po wcześniejszym zalogowaniu się
+    Wyświetla profil studenta po wcześniejszym zalogowaniu się.
     """
     return render(request, 'profile.html')
